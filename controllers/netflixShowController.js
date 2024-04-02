@@ -52,18 +52,62 @@ const getNetflixShowById = (req, res) => {
 // Controller function to add Netflix show
 const addNetflixShow = (req, res) => {
 	const data = req.body;
+	
 	const sql = `INSERT INTO NetflixShow SET ?`;
 
 	connection.query(sql, data, (error, results, fields) => {
 		if (error) {
-			console.error("Error executing query:", error);
-			res.status(500).json({ error: "Failed to add Netflix show" });
+			console.error("Error executing query:", error,data);
+			res.status(500).json({ error: "Failed to add Netflix show" ,data : data});
 			return;
 		}
 		res
 			.status(201)
 			.json({ message: "Netflix show added successfully", data: results });
 	});
+};
+
+//****
+// Controller function to add Netflix show
+const addNetflixShow = (req, res) => {
+    const data = req.body;
+    
+    const sql = `INSERT INTO NetflixShow SET ?`;
+
+    connection.query(sql, data, (error, results, fields) => {
+        if (error) {
+            console.error("Error executing query:", error);
+            res.status(500).json({ error: "Failed to add Netflix show", data: data });
+            return;
+        }
+        res.status(201).json({ message: "Netflix show added successfully", data: results });
+    });
+};
+
+// Controller function to update Netflix show
+const updateNetflixShow = (req, res) => {
+    const { id } = req.params; // รับค่า id ของ Netflix show ที่ต้องการอัปเดต
+    const newData = req.body; // รับข้อมูลที่ต้องการอัปเดต
+
+    // สร้างคำสั่ง SQL สำหรับอัปเดตข้อมูล Netflix show โดยใช้ WHERE clause เพื่อระบุ Netflix show ที่ต้องการอัปเดต
+    const sql = `UPDATE NetflixShow SET ? WHERE id = ?`;
+
+    // ส่งคำสั่ง SQL ไปยังฐานข้อมูล MySQL พร้อมกับข้อมูลที่ต้องการอัปเดตและ id ของ Netflix show
+    connection.query(sql, [newData, id], (error, results, fields) => {
+        if (error) {
+            console.error("Error executing query:", error);
+            res.status(500).json({ error: "Failed to update Netflix show" });
+            return;
+        }
+        // ตรวจสอบว่ามี Netflix show ที่ถูกอัปเดตหรือไม่
+        if (results.affectedRows === 0) {
+            // หากไม่พบ Netflix show ที่ต้องการอัปเดต ส่งคำตอบกลับว่าไม่พบ Netflix show
+            res.status(404).json({ error: "Netflix show not found" });
+            return;
+        }
+        // หากอัปเดต Netflix show สำเร็จ ส่งคำตอบกลับไปว่าอัปเดตข้อมูล Netflix show สำเร็จ
+        res.status(200).json({ message: "Netflix show updated successfully" });
+    });
 };
 
 // Controller function to update Netflix show
