@@ -20,10 +20,10 @@ router.get('/netflix-shows', getAllNetflixShows);
 
 router.get('/netflix-shows/:id', getNetflixShowById);
 
-router.post('/netflix-shows', authenticateUser, validateRequestBody, addNetflixShow);
+router.post('/netflix-shows',addNetflixShow);
 
-router.put('/netflix-shows/:id', authenticateUser, validateRequestBody, updateNetflixShow);
+router.put('/netflix-shows/:id',updateNetflixShow);
 
-router.delete('/netflix-shows/:id', authenticateUser, deleteNetflixShow);
+router.delete('/netflix-shows/:id',deleteNetflixShow);
 
 module.exports = router;

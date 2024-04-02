@@ -50,17 +50,12 @@ const getNetflixShowById = (req, res) => {
 };
 
 // Controller function to add Netflix show
-const addNetflixShow = (req, res) => {
-    const data = req.body;
-    res.json({data:data});
-    const sql = `INSERT INTO NetflixShow (id, title, certificate, runtime, rating, votes, genre) 
-                 VALUES (?, ?, ?, ?, ?, ?, ?)`;
-    const params = [data.id, data.title, data.certificate, data.runtime, data.rating, data.votes, data.genre];
-    
-//    executeQuery(sql, params, res, () => {
-  //      res.status(201).json({ message: 'Netflix show added successfully',data : data });
-    //});
-};
+const addNetflixShow = (req, res) => { 
+	const data = req.body; 
+	const sql = 'INSERT INTO NetflixShow SET ?'; 
+	executeQuery(sql, data, res, 
+	() => { res.status(201).json({ message: 'Netflix show added 
+	successfully' }); );
 
 // Controller function to update Netflix show
 const updateNetflixShow = (req, res) => {

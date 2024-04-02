@@ -1,8 +1,11 @@
 // เรียกใช้ Express.js
 const express = require('express');
+const bodyParser = require('body-parser');
 
 // สร้างแอปพลิเคชัน Express
 const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 // กำหนดพอร์ตที่แอปพลิเคชันจะรับคำขอ
 const port = 8000;
