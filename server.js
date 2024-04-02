@@ -15,7 +15,7 @@ app.use(checkIfValidID);
 app.use(logRequest);
 
 // Routes
-const netflixShowRouter = require('./routes/netflixShowRouter');
+const netflixShowRouter = require('./routes/netflixShowRoute');
 // app.use(netflixShowRouter);
 app.use('/', netflixShowRoute);
 
