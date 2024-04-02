@@ -18,7 +18,9 @@ app.use(logRequest);
 const netflixShowRouter = require('./routes/netflixShowRoute');
 // app.use(netflixShowRouter);
 app.use('/', netflixShowRouter);
-
+app.get('/home', (req,res) => {
+res.send('Home');
+});
 // Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
