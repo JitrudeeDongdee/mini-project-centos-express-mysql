@@ -17,22 +17,7 @@ app.use(logRequest);
 // Routes
 const netflixShowRouter = require('./routes/netflixShowRoute');
 // app.use(netflixShowRouter);
-app.use('/', netflixShowRoute);
-
-// GET /netflix-shows
-router.get('/netflix-shows', getAllNetflixShows);
-
-// GET /netflix-shows/:id
-router.get('/netflix-shows/:id', getNetflixShowById);
-
-// POST /netflix-shows
-router.post('/netflix-shows', authenticateUser, validateRequestBody, addNetflixShow);
-
-// PUT /netflix-shows/:id
-router.put('/netflix-shows/:id', authenticateUser, validateRequestBody, updateNetflixShow);
-
-// DELETE /netflix-shows/:id
-router.delete('/netflix-shows/:id', authenticateUser, deleteNetflixShow);
+app.use('/', netflixShowRouter);
 
 // Start server
 const PORT = process.env.PORT || 3000;

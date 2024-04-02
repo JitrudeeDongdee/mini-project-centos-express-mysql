@@ -12,7 +12,8 @@ const {
 } = require('../controllers/netflixShowController');
 
 // Import middleware functions
-const { authenticateUser, validateRequestBody } = require('../middlewares');
+const authenticateUser = require('../middleware/authenticateUser');
+const validateRequestBody = require('../middleware/validateRequestBody');
 
 // Routes
 router.get('/netflix-shows', getAllNetflixShows);
