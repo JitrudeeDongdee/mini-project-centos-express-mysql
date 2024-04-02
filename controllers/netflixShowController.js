@@ -3,9 +3,9 @@ const mysql = require('mysql');
 // Create connection to MySQL database
 const connection = mysql.createConnection({
     host: 'localhost',
-    user: 'your_username',
-    password: 'your_password',
-    database: 'your_database'
+    user: 'root',
+    password: '266543',
+    database: 'netflix_db'
 });
 
 // Connect to MySQL database
@@ -31,7 +31,7 @@ const executeQuery = (sql, params, res, callback) => {
 
 // Controller function to get all Netflix shows
 const getAllNetflixShows = (req, res) => {
-    const sql = 'SELECT * FROM netflix_shows';
+    const sql = 'SELECT * FROM NetflixShow';
     executeQuery(sql, [], res, (results) => {
         res.json(results);
     });
@@ -39,7 +39,7 @@ const getAllNetflixShows = (req, res) => {
 
 // Controller function to get Netflix show by ID
 const getNetflixShowById = (req, res) => {
-    const sql = 'SELECT * FROM netflix_shows WHERE id = ?';
+    const sql = 'SELECT * FROM NetflixShow WHERE id = ?';
     executeQuery(sql, [req.params.id], res, (results) => {
         if (results.length === 0) {
             res.status(404).json({ message: 'Netflix show not found' });
@@ -52,7 +52,7 @@ const getNetflixShowById = (req, res) => {
 // Controller function to add Netflix show
 const addNetflixShow = (req, res) => {
     const { title, genre, rating, votes } = req.body;
-    const sql = 'INSERT INTO netflix_shows (title, genre, rating, votes) VALUES (?, ?, ?, ?)';
+    const sql = 'INSERT INTO NetflixShow (title, genre, rating, votes) VALUES (?, ?, ?, ?)';
     const params = [title, genre, rating, votes];
     executeQuery(sql, params, res, (results) => {
         res.status(201).json({ message: 'Netflix show added successfully' });
@@ -62,7 +62,7 @@ const addNetflixShow = (req, res) => {
 // Controller function to update Netflix show
 const updateNetflixShow = (req, res) => {
     const { title, genre, rating, votes } = req.body;
-    const sql = 'UPDATE netflix_shows SET title = ?, genre = ?, rating = ?, votes = ? WHERE id = ?';
+    const sql = 'UPDATE NetflixShow SET title = ?, genre = ?, rating = ?, votes = ? WHERE id = ?';
     const params = [title, genre, rating, votes, req.params.id];
     executeQuery(sql, params, res, (results) => {
         if (results.affectedRows === 0) {
@@ -75,7 +75,7 @@ const updateNetflixShow = (req, res) => {
 
 // Controller function to delete Netflix show
 const deleteNetflixShow = (req, res) => {
-    const sql = 'DELETE FROM netflix_shows WHERE id = ?';
+    const sql = 'DELETE FROM NetflixShow WHERE id = ?';
     executeQuery(sql, [req.params.id], res, (results) => {
         if (results.affectedRows === 0) {
             res.status(404).json({ message: 'Netflix show not found' });
