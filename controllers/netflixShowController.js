@@ -2,9 +2,9 @@ const mysql = require('mysql');
 
 // Create connection to MySQL database
 const connection = mysql.createConnection({
-    host: 'localhost',
+    host: 'mini-project.c7qowy0066do.ap-southeast-2.rds.amazonaws.com',
     user: 'root',
-    password: '266543',
+    password: '12345678',
     database: 'netflix_db'
 });
 
