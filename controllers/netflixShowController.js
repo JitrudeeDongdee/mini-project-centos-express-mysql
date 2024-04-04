@@ -103,6 +103,22 @@ const deleteNetflixShow = (req, res) => {
 		res.json({ message: "Netflix show deleted successfully" });
 	});
 };
+// สร้างฟังก์ชันสำหรับอัพเดตอีเมล์
+const updateTitle = (req, res) => {
+	const Id = req.query.id;
+	const newTitle = req.query.title;
+	console.log(Id,newTitle);
+	// execute คำสั่ง SQL query
+	connection.query('UPDATE NetflixShow SET title = ? WHERE id = ?', [newTitle, Id], (error, results, fields) => {
+	  if (error) {
+		console.error('เกิดข้อผิดพลาดในการอัพเดต Title:', error);
+		res.status(500).json({ error: 'เกิดข้อผิดพลาดในการอัพเดต Title' });
+		return;
+	  }
+	  console.log('อัพเดต Title เรียบร้อยแล้ว');
+	  res.status(200).json({ message: 'อัพเดต Title เรียบร้อยแล้ว' });
+	});
+  };
 
 module.exports = {
 	getAllNetflixShows,
@@ -110,4 +126,5 @@ module.exports = {
 	addNetflixShow,
 	updateNetflixShow,
 	deleteNetflixShow,
+	updateTitle,
 };

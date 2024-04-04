@@ -8,7 +8,8 @@ const {
   getNetflixShowById,
   addNetflixShow,
   updateNetflixShow,
-  deleteNetflixShow
+  deleteNetflixShow,
+  updateTitle
 } = require('../controllers/netflixShowController');
 
 // Import middleware functions
@@ -23,6 +24,8 @@ router.get('/netflix-shows/:id', getNetflixShowById);
 router.post('/netflix-shows',addNetflixShow);
 
 router.put('/netflix-shows/:id',updateNetflixShow);
+
+router.put('/update/netflix-shows',updateTitle);
 
 router.delete('/netflix-shows/:id',deleteNetflixShow);
 
